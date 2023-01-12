@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from rest_framework.filters import SearchFilter
 from rest_framework.generics import (CreateAPIView, DestroyAPIView,
                                      ListAPIView, RetrieveAPIView,
                                      UpdateAPIView)
@@ -13,6 +14,8 @@ class Get_All_Products(ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [AllowAny,]
+    filter_backends = [SearchFilter]
+    search_fields = ('name',)
     
 class Product_Add(CreateAPIView):
     queryset = Product.objects.all()

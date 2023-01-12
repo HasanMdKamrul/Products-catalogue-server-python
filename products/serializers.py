@@ -30,6 +30,6 @@ class ProductSerializer(serializers.ModelSerializer):
         
     def get_temp_price(self, obj):
         if berlin_current_time > "11:00:00" and berlin_current_time < "15:00:00":
-            return  obj.price * 0.1
+            return  obj.price - obj.price * 0.1
         else:
             return obj.price
