@@ -6,12 +6,21 @@ WORKDIR /app
 
 ADD . /app
 
+
+
 COPY ./requirements.txt /app/requirements.txt
 RUN pip install -r requirements.txt
 COPY . /app 
 
-# Install dependencies
 
-COPY ./productCatalogue/.env ./productCatalogue/.env
+# FROM python:3-alpine
 
-# Install dependencies
+# WORKDIR /app
+
+# COPY . .
+
+# RUN pip install -r requirements.txt
+
+# EXPOSE 8000
+
+# CMD ["python", "manage.py", "runserver"]
