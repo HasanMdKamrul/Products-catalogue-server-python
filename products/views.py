@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework.filters import SearchFilter
+from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.generics import (CreateAPIView, DestroyAPIView,
                                      ListAPIView, RetrieveAPIView,
                                      UpdateAPIView)
@@ -24,7 +24,7 @@ class Get_All_Products(ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [AllowAny,]
-    filter_backends = [SearchFilter]
+    filter_backends = [SearchFilter,OrderingFilter]
     search_fields = ('name',)
     pagination_class = StandardResultsSetPagination
     
