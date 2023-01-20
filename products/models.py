@@ -10,7 +10,7 @@ class Product(models.Model):
     picture = models.TextField(blank=False, null=False)
     active = models.BooleanField()
     date_created = models.DateTimeField(auto_now_add=True)
-    User = models.ForeignKey(User ,on_delete=models.CASCADE)
+    User = models.ForeignKey(User , on_delete=models.CASCADE)
     
 
     def __str__(self):

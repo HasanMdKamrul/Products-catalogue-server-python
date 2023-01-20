@@ -1,4 +1,6 @@
+from django.http import JsonResponse
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.generics import (CreateAPIView, DestroyAPIView,
                                      ListAPIView, RetrieveAPIView,
@@ -46,6 +48,41 @@ class Product_Update(UpdateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [AllowAny]
+    
+
+
+# @csrf_exempt
+# def products_by_id(request,**kwargs):
+#     if request.method == 'GET':
+#         products = Product.objects.filter(User=kwargs['id'])
+#         serializer = ProductSerializer(products,many=True)
+#         return JsonResponse(data=serializer.data,safe=False)
+        
+
+class prodcuts_by_user_id(APIView):
+    permission_classes = [IsAuthenticated,]
+    def get(self,request,*args,**kwargs):
+        # ** getting the user id from the url
+       id = kwargs['id']
+    #    ** filter the products by user id
+       products = Product.objects.filter(User=id)
+    #    ** products json serialization
+       serializer = ProductSerializer(products,many=True)
+       return JsonResponse(data=serializer.data,safe=False)
+       
+
+# class prodcuts_by_user_id(ListAPIView):
+#     serializer_class = ProductSerializer
+#     permission_classes = [AllowAny,]
+#     def get_queryset(self):
+#         print(self.kwargs['id'])
+#         user_id = self.kwargs['id']
+#         products = Product.objects.filter(User=user_id);
+#         return products
+
+
+
+
     
 # class Product_Delete(DestroyAPIView):
 #     queryset = Product.objects.all()
