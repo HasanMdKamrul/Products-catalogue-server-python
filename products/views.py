@@ -33,13 +33,13 @@ class Get_All_Products(ListAPIView):
 class Product_Add(CreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 class Product_Detail(RetrieveAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated,]
 class Product_Delete(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated,]
     def delete(self,request,pk,*args,**kwargs):
         product_deleted = Product.objects.get(pk=pk)
         product_deleted.delete()
@@ -47,7 +47,7 @@ class Product_Delete(APIView):
 class Product_Update(UpdateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated,]
     
 
 
